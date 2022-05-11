@@ -4,9 +4,9 @@ import './index.css';
 import { createStore } from 'redux';
 import App from './components/App';
 import reportWebVitals from './reportWebVitals';
-import movies from './reducers';
+import rootReducer from './reducers';
 
-const store = createStore(movies);
+const store = createStore(rootReducer);
 console.log(store);
 // console.log('before-state', store.getState());
 
