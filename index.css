@@ -16,9 +16,10 @@ body {
   justify-content: center;
   align-items: center;
 }
+
 .search-container input {
   height: 43px;
-  width: 600px;
+  width: 800px;
   border-bottom-left-radius: 4px;
   border-top-left-radius: 4px;
   border: none;

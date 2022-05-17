@@ -8,17 +8,12 @@ class App extends React.Component {
   
   componentDidMount () {
     const { store } = this.props;
-    store.subscribe(()=> {
-      console.log('UPDATED');
-      
-    console.log('state', store.getState())
-      this.forceUpdate();
-    });
+    store.subscribe(()=> this.forceUpdate());
     //make api call
     // dispatch action
     store.dispatch(addMovies(data))
     console.log('state', store.getState())
-  }
+  };
 
   isMovieFavourite = (movie) => {
     const {movies} = this.props.store.getState();
@@ -37,12 +32,12 @@ class App extends React.Component {
   }
 
   render () {
-    const {movies} = this.props.store.getState(); //{movies: {}, search{}}
+    const {movies, search} = this.props.store.getState(); //{movies: {}, search{}}
     const {list, favourites, showFavourites} = movies;
     const displayMovies = showFavourites? favourites : list;
     return (
       <div className="App">
-        <Navbar />
+        <Navbar dispatch={this.props.store.dispatch} search={search} />
         <div className="main">
           <div className="tabs">
             <div className={`tab ${showFavourites ? '' : 'active-tab'}`} onClick={() => this.onChangeTab(false)}>Movies</div>
@@ -50,10 +45,10 @@ class App extends React.Component {
           </div>
   
           <div className="list" >
-            {displayMovies.map((movie, index) => (
+            {displayMovies.map((movie) => (
               <MovieCard 
                movie={movie}
-               key={`movies-${index}`}
+               key={movie.imdbID}
                dispatch={this.props.store.dispatch}
                isFavourite ={this.isMovieFavourite(movie)}
                />
